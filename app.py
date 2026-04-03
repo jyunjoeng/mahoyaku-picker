@@ -132,19 +132,28 @@ def _ranked_leaders_dataframe(
     return styled
 
 
-st.set_page_config(page_title="Mahoyaku Picker", layout="wide")
-st.title("Mahoyaku Picker")
+st.set_page_config(
+    page_title="MP1確定討伐用リーダー選びツール | MP1 Leader Picker",
+    layout="wide",
+)
+st.title("MP1確定討伐用リーダー選びツール")
+st.caption("MP1 Leader Picker")
 
 with st.form("picker_form"):
-    event_url = st.text_input("Event Page URL")
-    sheet_url = st.text_input("Google Sheets URL")
-    submitted = st.form_submit_button("Submit")
+    event_url = st.text_input(
+        "イベントページURL / Event Page URL", placeholder="https://gamerch.com/..."
+    )
+    with st.expander("詳細設定 / Advanced Settings"):
+        sheet_url = st.text_input("Spreadsheet URL (Leave blank)")
+    submitted = st.form_submit_button("Pick!")
 
 if submitted:
     if not event_url.strip():
-        st.error("Event URL is required.")
+        st.error("イベントURLが必要です。 / Event URL is required.")
     else:
-        with st.spinner("Fetching event, leaders, and ranking data..."):
+        with st.spinner(
+            "イベント、リーダー、ランキングデータを取得中... / Fetching event, leaders, and ranking data..."
+        ):
             try:
                 event_payload = _write_event_json(event_url.strip())
                 leaders = _write_leaders_json(sheet_url.strip())
@@ -157,17 +166,17 @@ if submitted:
             except Exception as exc:  # pragma: no cover - thin UI wrapper
                 st.exception(exc)
             else:
-                st.subheader("Event SSR Cards")
+                st.subheader("イベントSSRカード / Event SSR Cards")
                 for card in event_payload["cards"]:
                     st.markdown(f"**{card['name']}**")
                     st.markdown(", ".join(card["traits"]))
 
-                st.subheader("Leader Ranking")
+                st.subheader("リーダーランキング / Leader Ranking")
                 st.dataframe(
                     _ranked_leaders_dataframe(ranked, event_bonus),
                     use_container_width=True,
                     hide_index=True,
                 )
 
-                with st.expander("Markdown Export Preview"):
+                with st.expander("Markdown形式"):
                     st.markdown(markdown_table)
