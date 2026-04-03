@@ -10,8 +10,4 @@ A Streamlit app for ranking Mahoyaku leader units for events.
 
 ## Usage
 
-Visit the deployed app and enter:
-- Event page URL
-- Google Sheets URL (optional if default is configured)
-
-Click Submit to see the ranked leaders for your event.
+Enter an event page URL. Leaders are automatically ranked based on trait compatibility with event bonuses.
