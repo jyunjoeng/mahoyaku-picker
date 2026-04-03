@@ -95,7 +95,9 @@ def _ranked_leaders_dataframe(
         )
 
     frame = pd.DataFrame(rows)
-    highlight_columns = [
+    
+    # Separate columns for different highlight colors
+    required_growth_columns = [
         "要求金1",
         "要求金2",
         "要求金3",
@@ -104,19 +106,30 @@ def _ranked_leaders_dataframe(
         "要求銅",
         "要求無",
         "成長金",
+    ]
+    
+    rejected_columns = [
         "拒否金",
         "拒否銀",
         "拒否銅",
         "拒否無",
     ]
 
-    def highlight_cell(value: object) -> str:
+    def highlight_required(value: object) -> str:
         if value and str(value) in bonus_values:
             # Semi-transparent gold works in both light and dark modes
             return "background-color: rgba(255, 193, 7, 0.3); font-weight: 700;"
         return ""
+    
+    def highlight_rejected(value: object) -> str:
+        if value and str(value) in bonus_values:
+            # Semi-transparent red works in both light and dark modes
+            return "background-color: rgba(244, 67, 54, 0.3); font-weight: 700;"
+        return ""
 
-    return frame.style.map(highlight_cell, subset=highlight_columns)
+    styled = frame.style.map(highlight_required, subset=required_growth_columns)
+    styled = styled.map(highlight_rejected, subset=rejected_columns)
+    return styled
 
 
 st.set_page_config(page_title="Mahoyaku Picker", layout="wide")
