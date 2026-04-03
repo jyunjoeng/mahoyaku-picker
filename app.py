@@ -95,7 +95,7 @@ def _ranked_leaders_dataframe(
         )
 
     frame = pd.DataFrame(rows)
-    
+
     # Separate columns for different highlight colors
     required_growth_columns = [
         "要求金1",
@@ -107,7 +107,7 @@ def _ranked_leaders_dataframe(
         "要求無",
         "成長金",
     ]
-    
+
     rejected_columns = [
         "拒否金",
         "拒否銀",
@@ -120,7 +120,7 @@ def _ranked_leaders_dataframe(
             # Semi-transparent gold works in both light and dark modes
             return "background-color: rgba(255, 193, 7, 0.3); font-weight: 700;"
         return ""
-    
+
     def highlight_rejected(value: object) -> str:
         if value and str(value) in bonus_values:
             # Semi-transparent red works in both light and dark modes

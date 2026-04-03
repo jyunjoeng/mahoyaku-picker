@@ -70,7 +70,8 @@ def rank_leaders(
             {
                 "leader": leader,
                 "metrics": metrics,
-                "has_bonus_gold_growth": leader.get("成長特性G", "") in event_bonus_attributes,
+                "has_bonus_gold_growth": leader.get("成長特性G", "")
+                in event_bonus_attributes,
                 "has_rejected_event_bonus": any(
                     value in rejected_event_bonus
                     for value in _non_empty_values(leader, REJECTED_FIELDS)
@@ -151,8 +152,12 @@ def render_ranked_leaders_table(
                 leader.get("キャラ", ""),
                 leader.get("キャラタイプ", ""),
                 _highlight(_non_empty_values(leader, GOLD_REQUIRED_FIELDS), all_bonus),
-                _highlight(_non_empty_values(leader, SILVER_REQUIRED_FIELDS), all_bonus),
-                _highlight(_non_empty_values(leader, BRONZE_REQUIRED_FIELDS), all_bonus),
+                _highlight(
+                    _non_empty_values(leader, SILVER_REQUIRED_FIELDS), all_bonus
+                ),
+                _highlight(
+                    _non_empty_values(leader, BRONZE_REQUIRED_FIELDS), all_bonus
+                ),
                 _highlight(_non_empty_values(leader, ("成長特性G",)), all_bonus),
                 _highlight(_non_empty_values(leader, REJECTED_FIELDS), all_bonus),
             ]
@@ -189,7 +194,9 @@ def main(argv: Sequence[str] | None = None) -> None:
     event_json_path = Path(args.event_json)
     leaders = json.loads(Path(args.leaders_json).read_text(encoding="utf-8"))
     ranked = rank_event(event_payload, leaders)
-    rendered_table = render_ranked_leaders_table(ranked, build_event_bonus(event_payload))
+    rendered_table = render_ranked_leaders_table(
+        ranked, build_event_bonus(event_payload)
+    )
 
     output_path = default_ranking_output_path(event_json_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)

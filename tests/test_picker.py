@@ -165,7 +165,9 @@ def test_render_ranked_leaders_table_highlights_bonus_attributes() -> None:
     assert "| --- | --- | --- | --- |" in table
 
 
-def test_build_event_bonus_uses_event_traits_as_gold_and_hardcoded_empty_field() -> None:
+def test_build_event_bonus_uses_event_traits_as_gold_and_hardcoded_empty_field() -> (
+    None
+):
     event_payload = {
         "traits": ["a", "b"],
         "cards": [],

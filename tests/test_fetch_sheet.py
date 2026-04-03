@@ -11,9 +11,7 @@ from mahoyaku_picker.fetch_sheet import (
 
 FAKE_SHEET_ID = "test_sheet_id_123"
 FAKE_SHEET_URL = (
-    "https://docs.google.com/spreadsheets/d/"
-    f"{FAKE_SHEET_ID}"
-    "/edit?gid=0#gid=0"
+    "https://docs.google.com/spreadsheets/d/" f"{FAKE_SHEET_ID}" "/edit?gid=0#gid=0"
 )
 
 
