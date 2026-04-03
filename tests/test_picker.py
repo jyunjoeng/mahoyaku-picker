@@ -157,10 +157,10 @@ def test_render_ranked_leaders_table_highlights_bonus_attributes() -> None:
 
     lines = table.splitlines()
     assert lines[2].startswith("| 1 |")
-    assert "**g1**" in table
-    assert "**g2**" in table
-    assert "**s1**" in table
-    assert "**b1**" in table
+    assert "***g1***" in table
+    assert "***g2***" in table
+    assert "***s1***" in table
+    assert "***b1***" in table
     assert "| Rank | Leader | Character | Type |" in table
     assert "| --- | --- | --- | --- |" in table
 

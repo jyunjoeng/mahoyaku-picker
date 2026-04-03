@@ -33,7 +33,7 @@ def _count_matches(values: Iterable[str], bonus_values: set[str]) -> int:
 def _highlight(values: Iterable[str], bonus_values: set[str]) -> str:
     rendered = []
     for value in values:
-        rendered.append(f"**{value}**" if value in bonus_values else value)
+        rendered.append(f"***{value}***" if value in bonus_values else value)
     return ", ".join(rendered)
 
 
