@@ -112,7 +112,8 @@ def _ranked_leaders_dataframe(
 
     def highlight_cell(value: object) -> str:
         if value and str(value) in bonus_values:
-            return "background-color: #402908; font-weight: 700;"
+            # Semi-transparent gold works in both light and dark modes
+            return "background-color: rgba(255, 193, 7, 0.3); font-weight: 700;"
         return ""
 
     return frame.style.map(highlight_cell, subset=highlight_columns)
