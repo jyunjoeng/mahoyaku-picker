@@ -1,0 +1,42 @@
+# Vagrant
+Vagrantfile
+.vagrant/
+
+# Developer documentation
+DEVELOPERS.md
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+*.pyd
+*.so
+build/
+dist/
+wheels/
+*.egg-info
+.eggs/
+*.egg
+
+# Virtual environments
+.venv
+venv/
+env/
+ENV/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+
+# Downloaded page dumps
+downloaded/
+
+# Generated data exports
+data/
