@@ -54,6 +54,30 @@ def _build_event_bonus(event_payload: dict[str, object]) -> dict[str, list[str]]
     }
 
 
+def _localize_markdown_table(markdown_table: str) -> str:
+    lines = markdown_table.splitlines()
+    if not lines:
+        return markdown_table
+
+    header_map = {
+        "Rank": "ランク",
+        "Leader": "覚醒名",
+        "Character": "キャラ",
+        "Type": "タイプ",
+        "Gold Required": "要求金",
+        "Silver Required": "要求銀",
+        "Bronze Required": "要求銅",
+        "Growth G": "成長金",
+        "Rejected": "拒否特性",
+    }
+
+    lines[0] = lines[0]
+    for english, japanese in header_map.items():
+        lines[0] = lines[0].replace(f" {english} ", f" {japanese} ")
+
+    return "\n".join(lines)
+
+
 def _ranked_leaders_dataframe(
     ranked: list[dict[str, object]],
     event_bonus: dict[str, list[str]],
@@ -163,6 +187,7 @@ if submitted:
                     ranked,
                     event_bonus,
                 )
+                markdown_table = _localize_markdown_table(markdown_table)
             except Exception as exc:  # pragma: no cover - thin UI wrapper
                 st.exception(exc)
             else:
